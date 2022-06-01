@@ -1,0 +1,33 @@
+.police-tablet {
+    display: none;
+}
+
+.tablet-bg {
+    position: absolute;
+    top: 12.3vh; 
+    left: 25vh; 
+    width: 72vw;
+    height: 75vh;
+    background-color: white;
+}
+
+.tablet-iframe {
+    position: absolute; 
+    top: 12.3vh; 
+    left: 0.35vh; 
+    right: 0; 
+    width: 72vw;
+    height: 75vh;
+    margin: 0 auto; 
+}
+
+.tablet-frame {
+    position: absolute; 
+    top: 5.5vh; 
+    left: 0; 
+    right: 0; 
+    margin: 0 auto; 
+    pointer-events: none; 
+    width:80vw;
+    height:89vh;
+}
