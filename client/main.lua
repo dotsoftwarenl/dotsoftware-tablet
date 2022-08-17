@@ -1,30 +1,30 @@
 tabletOpen, CurrentProp = false, nil
 
-RegisterCommand("meos", function(source, args, rawCommand)
-    if not tabletOpen then
-        OpenPoliceTablet()
-    end
-end, false)
-
 RegisterNUICallback('CloseTablet', function(data)
-    ClosePoliceTablet()
+    CloseTablet()
 end)
 
 -- // Functions \\ --
-OpenPoliceTablet = function()
-    AddPropToPed()
-    loadAnimDict('amb@code_human_in_bus_passenger_idles@female@tablet@base')
-    TaskPlayAnim(GetPlayerPed(-1), "amb@code_human_in_bus_passenger_idles@female@tablet@base", "base", 3.0, 3.0, -1, 49, 0, 0, 0, 0)
+OpenTablet = function(type)
+    if Config["EnableAnimations"] then
+        AddPropToPed()
+        loadAnimDict('amb@code_human_in_bus_passenger_idles@female@tablet@base')
+        TaskPlayAnim(GetPlayerPed(-1), "amb@code_human_in_bus_passenger_idles@female@tablet@base", "base", 3.0, 3.0, -1, 49, 0, 0, 0, 0)
+    end
     tabletOpen = true
     SetNuiFocus(true, true)
+
+    actionType = string.format('Open%sTablet', type)
     SendNUIMessage({
-        action = 'OpenTablet',
+        action = actionType,
     })
 end
 
-ClosePoliceTablet = function()
-    DeleteEntity(CurrentProp)
-    ClearPedTasks(GetPlayerPed(-1))
+CloseTablet = function()
+    if Config["EnableAnimations"] then
+        DeleteEntity(CurrentProp)
+        ClearPedTasks(GetPlayerPed(-1))
+    end
     SetNuiFocus(false, false)
     tabletOpen = false
 end
@@ -51,15 +51,3 @@ RequestModelHash = function(Model)
         Citizen.Wait(1)
     end
  end
-
- -- // Event \\ --
- RegisterNetEvent('dotsoftware:meos:trigger')
- AddEventHandler('dotsoftware:meos:trigger', function()
-    if not tabletOpen then
-        OpenPoliceTablet()
-        tabletOpen = true
-    else
-        ClosePoliceTablet()
-        tabletOpen = false
-    end
- end)

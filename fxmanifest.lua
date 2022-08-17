@@ -3,11 +3,16 @@ games { 'gta5' }
 
 author '.SOFTWARE <https://discord.gg/GXJ2XaJuTW>'
 description '.SOFTWARE MEOS tablet script'
-version '1.0.0'
+version '1.2.0'
 
 ui_page 'html/index.html'
 
-client_script 'client/main.lua'
+client_scripts {
+    'config.lua',
+    'client/main.lua',
+    'client/events.lua',
+    'client/commands.lua'
+}
 
 files {
     'html/index.html',

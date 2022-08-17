@@ -2,6 +2,10 @@
     display: none;
 }
 
+.epd-tablet {
+    display: none;
+}
+
 .tablet-bg {
     position: absolute;
     top: 12.3vh; 

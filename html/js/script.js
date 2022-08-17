@@ -1,29 +1,35 @@
-var PoliceTabletOpen = false;
-
 OpenPoliceTablet = function() {
-    PoliceTabletOpen = true;
+    TabletOpen = true;
     $('.police-tablet').show(250);
 }
 
-ClosePoliceTablet = function() {
-    PoliceTabletOpen = false;
+OpenEpdTablet = function() {
+    TabletOpen = true;
+    $('.epd-tablet').show(250);
+}
+
+CloseTablet = function() {
+    TabletOpen = false;
+    $('.epd-tablet').hide(250);
     $('.police-tablet').hide(250);
-    $.post('https://dotsoftware-meos-tablet/CloseTablet', JSON.stringify({}))
+    $.post(`https://${GetParentResourceName()}/CloseTablet`, JSON.stringify({}))
 }
 
 $(function () {
     window.addEventListener('message', function(event) {
         switch(event.data.action) {
-            case "OpenTablet":
+            case "OpenPoliceTablet":
                 OpenPoliceTablet()
+                break;
+            case "OpenEpdTablet":
+                OpenEpdTablet()
                 break;
         }
     });
-
     window.onkeydown = function(e) {
         var e = e || window.event;
         if (e.keyCode === 27) {
-            ClosePoliceTablet();
+            CloseTablet();
         }
     };
 });
